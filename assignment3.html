@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -9,22 +10,24 @@
         <p>
             This is some text.
         </p>
-        <p>
-            This is some more text.
-        </p>
-        <div id="#myviz">
+        <div id="myviz">
         </div>
-    </body>
-    <script>
-      var mySpec = {
+    <script type="text/javascript">
+     var mySpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+  "height": 500,
+  "padding": 50,
   "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/building_inventory.csv"},
-  "mark": "bar",
+  "description": "A bar chart showing the relationship between the sum of square footage obtained by departments from a particular Congressional District",
+  "mark": {"type":"bar", "width": 14,"cursor":"pointer","stroke":"black","tooltip":true},
   "encoding": {
     "x": {"field": "Congress Dist", "type": "quantitative"},
-    "y": {"aggregate": "sum","field": "Square Footage", "type": "quantitative"}
+    "y": {"aggregate": "sum","field": "Square Footage", "type": "quantitative"},
+    "color": {"field": "Agency Name", "scale": {"scheme": "category20b"}}
   }
 };
         vegaEmbed('#myviz', mySpec);
     </script>
+  </body>
 </html>
