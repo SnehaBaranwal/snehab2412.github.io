@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A pie chart depicting the offense name data.",
+  "title": "Different Divisions showing total records by hovering over the pie chart",
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
+  "mark": {
+    "type":"arc",
+  "tooltip": true
+  },
+  "encoding": {
+    "theta": {"aggregate":"count","field": "DIVISION_NAME", "type": "quantitative"},
+    "color": {"field": "DIVISION_NAME", "type": "nominal","scale": {"scheme": "paired"}}
+  }
+};
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
