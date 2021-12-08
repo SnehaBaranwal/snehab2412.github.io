@@ -12,7 +12,9 @@
     <script type="text/javascript">
       var yourVlSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A pie chart depicting the offense name data.",
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
+  "vconcat": [
+ { 
   "title": "Different Divisions showing total records by hovering over the pie chart",
   "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
   "mark": {
@@ -23,7 +25,23 @@
     "theta": {"aggregate":"count","field": "DIVISION_NAME", "type": "quantitative"},
     "color": {"field": "DIVISION_NAME", "type": "nominal","scale": {"scheme": "paired"}}
   }
-};
+},
+{
+  "title": "Line chart depicting the comparisons between the different region names based on the record counts",
+  "mark": {
+    "type": "line",
+    "point": true,
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"timeUnit": "year", "field": "DATA_YEAR"},
+    "y": {"aggregate":"count", "field": "REGION_NAME", "type": "quantitative"},
+    "color": {"field": "REGION_NAME", "type": "nominal"}
+  }
+}
+]
+}
+;
       vegaEmbed('#vis', yourVlSpec);
     </script>
   </body>
