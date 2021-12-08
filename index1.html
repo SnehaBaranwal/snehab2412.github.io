@@ -7,63 +7,68 @@
         <title>This is my example homepage.</title>
     </head>
     <body bgcolor="#000000">
-        <h3 style="color:white;">
-           The First Visualization depicts the relation between the sum of square footage obtained by departments from a particular Congressional District 
-        </h3>
-        <h3 style="color:white;">
-         The Second Visualization shows the <b> average </b> number of total floors obtained by the Congressional Full Name 
-        </h3>
-        <p style="color:white;"}> Both of the visuals show more information while hovering on the bars giving the data visuals more interactivity </p>
         <div id="myviz">
         </div>
     <script type="text/javascript">
      var mySpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/building_inventory.csv"},
+  "description": "A pie chart depicting the offense name data.",
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/Crime_Reports_2018.csv"},
   "vconcat": [
-  {
-  "width": 400,
-  "height": 500,
-  "description": "A bar chart showing the relationship between the sum of square footage obtained by departments from a particular Congressional District",
-  "mark": {"type":"bar", "width": 14,"cursor":"pointer","stroke":"black","tooltip":true},
-  "encoding": {
-    "x": {"field": "Congress Dist", "type": "quantitative"},
-    "y": {"aggregate": "sum","field": "Square Footage", "type": "quantitative"},
-    "color": {"field": "Agency Name", "scale": {"scheme": "category20b"},"legend":null}
-  }
- },
 {
-  "height": {"step": 50},
-  "width": 400,
-  "mark": {"type": "bar", "yOffset": 5, "cornerRadiusEnd": 2, "height": {"band": 0.5},"tooltip":true},
+
+  "mark": {
+    "type":"bar",
+    "tooltip":true
+  },
   "encoding": {
-    "y": {
-      "field": "Congressional Full Name",
-      "scale": {"padding": 0},
-      "axis": {
-        "bandPosition": 0,
-        "grid": true,
-        "domain": false,
-        "ticks": false,
-        "labelAlign": "left",
-        "labelBaseline": "middle",
-        "labelPadding": -5,
-        "labelOffset": -15,
-        "titleX": 5,
-        "titleY": -5,
-        "titleAngle": 0,
-        "titleAlign": "left"
-      }
-    },
     "x": {
-     "aggregate": "sum",
-     "field": "Total Floors", 
-     "type": "quantitative"
+      "field": "Location Type",
+      "type": "nominal",
+      "title": "Type of location in austin"
     },
-    "color": {"field": "Congressional Full Name",       "scale": {"scheme": "category20b"},"legend":null}
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Family Violence",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Y", "N"],
+        "range": ["#f00", "#c7c7c7"]
+      },
+      "title": "Family violence or not"
+    }
   }
- }
- ]
+},
+{
+ 
+  "mark": {
+    "type":"bar",
+  "tooltip": true
+  },
+"encoding": {
+    "x": {
+      "field": "APD Sector",
+      "type": "nominal",
+      "title": "Different sectors in Austin"
+    },
+        "y": {
+      "aggregate": "count",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Clearance Status",
+      "type": "nominal",
+      "scale": {
+        "domain": ["C","N"],
+        "range": ["#e7ba52", "#c7c7c7"]
+      }
+   }
+} 
+}
+  ]
 };
         vegaEmbed('#myviz', mySpec);
     </script>
