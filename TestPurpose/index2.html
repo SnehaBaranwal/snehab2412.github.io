@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Count of incidents in the regions over the years",
+  "title": "Line chart depicting the comparisons between the different region names based on the record counts"
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
+  "mark": {
+    "type": "line",
+    "point": true,
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"timeUnit": "year", "field": "DATA_YEAR"},
+    "y": {"aggregate":"count", "field": "REGION_NAME", "type": "quantitative"},
+    "color": {"field": "REGION_NAME", "type": "nominal"}
+  }
+};
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
