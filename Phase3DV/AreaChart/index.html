@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
+  "mark": {
+    "type":"area",
+    "tooltip":true
+  },
+  "encoding": {
+    "x": {
+      "timeUnit": "year",
+      "field": "DATA_YEAR",
+      "type": "ordinal",
+      "title": "Over the years"
+    },
+    "y": {
+      "aggregate": "count",
+      "field": "TOTAL_OFFENDER_COUNT",
+      "type": "quantitative",
+      "title": "Total offenders"
+    },
+    "color": {
+      "field": "REGION_NAME",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Midwest", "Northeast", "South", "U.S. Territories", "West", "Other"],
+        "range": ["#e7ba52", "#339933", "#aec7e8", "#1f77b4", "#9467bd","#ff0000"]
+      },
+      "title": "Region name"
+    }
+  }
+}
+;
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>

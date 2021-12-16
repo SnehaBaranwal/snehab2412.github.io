@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/SnehaBaranwal/snehab2412.github.io/master/hate_crime.csv"},
+  "vconcat": [{
+    "selection": {
+      "brush": {"type": "interval"}
+    },
+    "mark": {
+      "type":"bar",
+      "color":"#8830BA",
+      "stroke": "#000000",
+      "tooltip": true    },
+    "encoding": {
+      "x": {"field": "STATE_NAME","type": "nominal"},
+      "y": {"aggregate":"count","field": "STATE_NAME","type": "quantitative","title":"Number of Incidences"}
+    }
+  }, {
+    "transform": [
+      {"filter": {"selection": "brush"}}
+    ],
+    "mark": {
+      "type":"bar",
+      "color":"#BA307F",
+      "tooltip":true
+    },
+    "encoding": {
+      "x": {
+        "field": "AGENCY_TYPE_NAME", "type": "nominal","title":"Type of place"
+      },
+      "y": {
+        "aggregate":"count","field": "STATE_NAME","type": "quantitative","title":"Number of Incidences"
+      }
+    }
+  }]
+}
+;
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
